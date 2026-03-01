@@ -452,10 +452,14 @@
                 
                 for (const curr of currencies) {
                     try {
-                        const response = await fetch(`https://api.exchangerate.host/latest?base=${curr}&symbols=UZS`);
-                        if (!response.ok) throw new Error('API javobi xato');
-                        const data = await response.json();
-                        rates[curr] = Number(data.rates.UZS).toFixed(2);
+                        const response = await fetch(`https://open.er-api.com/v6/latest/${curr}`);
+const data = await response.json();
+
+// data.result "success" bo‘lsa ishlaydi
+if (data.result !== "success") throw new Error("API javobi xato");
+
+// UZS kursi
+rates[curr] = Number(data.rates.UZS).toFixed(2);
                     } catch (e) {
                         console.error(`${curr} kursini yuklay olmadi:`, e);
                         rates[curr] = 'Xato';
@@ -682,4 +686,5 @@
     </script>
 </body>
 </html>
+
 
