@@ -517,14 +517,19 @@ rates[curr] = Number(data.rates.UZS).toFixed(2);
                 const wind = weather.current_weather?.windspeed;
 const temp = weather.current_weather?.temperature;
                 
-                elem.innerHTML = `
-                    <div class="current-weather">
-                        <div class="weather-icon">${getWeatherIcon(weather.current.weather_code)}</div>
-                        <div class="temperature">${temp.toFixed(1)}°C</div>
-                        <div class="wind-info">💨 Shamol: ${wind.toFixed(1)} km/soat</div>
-                        <div class="location-name">📍 ${currentLocation.name}</div>
-                    </div>
-                `;
+                const tempText = (typeof temp === "number") ? temp.toFixed(1) : "—";
+const windText = (typeof wind === "number") ? wind.toFixed(1) : "—";
+
+elem.innerHTML = `
+    <div class="current-weather">
+        <div class="weather-icon">
+            ${getWeatherIcon(weather.current_weather?.weathercode)}
+        </div>
+        <div class="temperature">${tempText}°C</div>
+        <div class="wind-info">💨 Shamol: ${windText} km/soat</div>
+        <div class="location-name">📍 ${currentLocation.name}</div>
+    </div>
+`;
 
                 // Grafik yangilash
                 updateChart(weather.hourly.time, weather.hourly.temperature_2m);
@@ -686,6 +691,7 @@ const temp = weather.current_weather?.temperature;
     </script>
 </body>
 </html>
+
 
 
 
