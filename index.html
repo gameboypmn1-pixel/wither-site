@@ -514,8 +514,8 @@ rates[curr] = Number(data.rates.UZS).toFixed(2);
                 const weather = await fetchWeather(currentLocation.lat, currentLocation.lon);
                 if (!weather) throw new Error('Ob-havo ma\'lumoti yuklay olmadi');
 
-                const wind = weather.current.wind_speed;
-                const temp = weather.current.temperature;
+                const wind = weather.current_weather?.windspeed;
+const temp = weather.current_weather?.temperature;
                 
                 elem.innerHTML = `
                     <div class="current-weather">
@@ -686,5 +686,6 @@ rates[curr] = Number(data.rates.UZS).toFixed(2);
     </script>
 </body>
 </html>
+
 
 
