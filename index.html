@@ -452,10 +452,10 @@
                 
                 for (const curr of currencies) {
                     try {
-                        const response = await fetch(`https://www.frankfurter.app/latest?from=${curr}&to=UZS`);
+                        const response = await fetch(`https://api.exchangerate.host/latest?base=${curr}&symbols=UZS`);
                         if (!response.ok) throw new Error('API javobi xato');
                         const data = await response.json();
-                        rates[curr] = data.rates.UZS.toFixed(2);
+                        rates[curr] = Number(data.rates.UZS).toFixed(2);
                     } catch (e) {
                         console.error(`${curr} kursini yuklay olmadi:`, e);
                         rates[curr] = 'Xato';
@@ -682,3 +682,4 @@
     </script>
 </body>
 </html>
+
